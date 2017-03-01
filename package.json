@@ -1,0 +1,26 @@
+{
+  "name": "rengage",
+  "version": "0.0.1",
+  "description": "Resume Engagement",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm-run-all build serve",
+    "build": "webpack --progress --colors --config ./config/webpack.config.dev.js",
+    "serve": "DEBUG=info node ./bin/server.js"
+  },
+  "dependencies": {
+    "@types/node": "^7.0.5",
+    "debug": "^2.6.1",
+    "express": "^4.14.1",
+    "firebase": "^3.6.10",
+    "npm-run-all": "^4.0.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-mde": "^0.9.5",
+    "redux": "^3.6.0",
+    "ts-loader": "^2.0.1",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
+  }
+}
