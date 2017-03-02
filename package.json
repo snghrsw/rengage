@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm-run-all build serve",
     "build": "webpack --progress --colors --config ./config/webpack.config.dev.js",
-    "serve": "DEBUG=info node ./bin/server.js"
+    "serve": "DEBUG=info node --debug=5858 ./bin/server.js"
   },
   "dependencies": {
     "@types/node": "^7.0.5",
@@ -21,6 +21,7 @@
     "redux": "^3.6.0",
     "ts-loader": "^2.0.1",
     "typescript": "^2.2.1",
+    "universal-router": "^2.0.0",
     "webpack": "^2.2.1"
   }
 }

@@ -1,56 +1,37 @@
+import * as React from 'react';
 import * as express from 'express';
 import * as firebase from 'firebase';
 
 import App from './../shared/components/App';
+import ReactDOM from 'react-dom';
 import debugFactory from 'debug';
 import { renderToString } from 'react-dom/server';
+import { resolve } from 'universal-router';
 
 const app = express();
 const debug = debugFactory('info');
 
 const config = {
-	apiKey: process.env.FIREBASE_API_KEY,
-	authDomain: "resume-7a6c3.firebaseapp.com",
-	databaseURL: "https://resume-7a6c3.firebaseio.com",
-	storageBucket: "resume-7a6c3.appspot.com",
-	messagingSenderId: "103183460643"
+	apiKey: 'AIzaSyC5c_mdvsEHCia1wf_lqCaIZQWS8lBh9Bk',
+	authDomain: 'resume-7a6c3.firebaseapp.com',
+	databaseURL: 'https://resume-7a6c3.firebaseio.com',
+	storageBucket: 'resume-7a6c3.appspot.com',
+	messagingSenderId: '103183460643'
 }
 
 firebase.initializeApp(config);
 const database = firebase.database();
 
-function checkAuthCustomer(req, res) {
-	res.redirect('/');
-} 
+const routes = [
+  { path: '*', action: () => App({}) },
+];
 
-function checkAuthAdmin(req, res) {
-	res.redirect('/login');
-} 
-
-app.get('/:accessToken', checkAuthCustomer, (req, res) => {
-	res.send(renderToString(App({})))
-});
-
-app.get('/', (req, res) =>
-	res.send(renderToString(App({})))
-);
-
-app.get('/please-wait', checkAuthAdmin, (req, res) => {
-	res.send(renderToString(App({
-		state: 123
-	})))
-});
-
-app.get('/login', checkAuthAdmin, (req, res) => {
-	res.send(renderToString(App({
-		state: 123
-	})))
-});
-
-app.get('/admin', checkAuthAdmin, (req, res) => {
-	res.send(renderToString(App({
-		state: 123
-	})))
+app.get('*', (req, res) => {
+	debug(req.url);
+	resolve(routes, { path: req.url }).then(component => {
+		debug(component);
+		res.send(renderToString(component));
+	});
 });
 
 // Login
@@ -78,9 +59,5 @@ app.listen(3000, () => {
   debug('Example app listening on port 3000!');
 });
 
-firebase.auth().signInWithEmailAndPassword('hirayamaru@gmail.com', 'shin0123')
-	.catch(error => {
-		debug(error);
-	});
 
 
