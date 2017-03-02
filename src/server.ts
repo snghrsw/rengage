@@ -1,4 +1,5 @@
 import * as ReactDOM from 'react-dom';
+import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as firebase from 'firebase';
 
@@ -11,6 +12,8 @@ import routes from './routes';
 const app = express();
 const debug = debugFactory('info');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.use(async (req, res) => {
