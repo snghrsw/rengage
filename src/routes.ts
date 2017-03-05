@@ -11,10 +11,12 @@ export default [
 	{
 		path: '/admin',
 		action: ({ redirect }) => {
-			if (firebase.auth().currentUser) {
-				return AdminBoard();
-			}
-			return redirect('/login');
+			firebase.auth().onAuthStateChanged(user => {
+				if (user) {
+					return AdminBoard();
+				}
+				return redirect('/login');
+			});
 		}
 	},
 ];
