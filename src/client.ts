@@ -8,4 +8,8 @@ function render(component) {
 	ReactDOM.render(component, rootElement);
 }
 
-Router.resolve(routes, { path: location.pathname }).then(render);
+const options = {
+	path: location.pathname,
+	redirect: (path) => location.replace(path)
+}
+Router.resolve(routes, options).then(render);
