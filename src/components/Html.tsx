@@ -1,13 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 
-export default function Html(props) {
+export default function Html(content: HTMLElement) {
   return (
     <html>
       <body>
         <h1>hello world</h1>
-        <div id="root">
-          {props.children}
-        </div>
+        <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
         <script src="vendor.js" />
         <script src="bundle.js" />
       </body>
