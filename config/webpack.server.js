@@ -1,17 +1,17 @@
 module.exports = {
-  entry: "./src/server.ts",
+  entry: './src/server.ts',
   output: {
-    filename: "./bin/server.js"
+    filename: './bin/server.js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: ['.ts', '.tsx', '.js'],
   },
   target: 'node',
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
   },
   module: {
     rules: [
@@ -20,10 +20,10 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
-};
+}
