@@ -10,7 +10,8 @@
     "serve": "DEBUG=info ts-node --debug ./src/server.ts",
     "clean": "rimraf ./bin && rimraf ./public",
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --test --fix './src/**/*.ts?(x)'",
-    "build:client": "webpack --progress --colors --config ./config/webpack.client.js"
+    "build:client": "webpack --progress --colors --config ./config/webpack.client.js",
+    "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch"
   },
   "jest": {
     "transform": {
