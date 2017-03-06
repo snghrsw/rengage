@@ -1,22 +1,24 @@
-import Html from "./components/Html";
-import LoginForm from "./components/organisms/LoginForm";
-import AdminBoard from "./components/pages/AdminBoard";
-import firebase from "./server/firebase";
+import AdminBoard from './components/pages/AdminBoard';
+import LoginForm from './components/organisms/LoginForm';
+import { isAuthLogin } from './server/firebase';
 
 export default [
   {
-    action: () => LoginForm(),
-    path: "/login",
+    path: '/login',
+    action: ({ redirect }) => {
+      if (isAuthLogin()) {
+        redirect('/admin');
+      }
+      return LoginForm();
+    },
   },
   {
+    path: '/admin',
     action: ({ redirect }) => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          return AdminBoard();
-        }
-        return redirect("/login");
-      });
+      if (!isAuthLogin()) {
+        redirect('/login');
+      }
+      return AdminBoard();
     },
-    path: "/admin",
   },
 ];
