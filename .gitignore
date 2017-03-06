@@ -4,3 +4,5 @@ bin
 public
 typings
 launch.json
+yarn-error.log
+sketch/*
