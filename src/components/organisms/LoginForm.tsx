@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export default function LoginForm() {
   return (
-    <div id="login-form">
+    <div>
       <form action="auth" method="POST">
         <label>メールアドレス</label>
         <input type="text" name="username" />
