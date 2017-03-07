@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function Html(content: HTMLElement) {
+export default function Html(content: string) {
   return (
     <html>
       <body>

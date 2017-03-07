@@ -22,8 +22,9 @@ app.use(async (req, res) => {
   const Component: Element = await Router.resolve(routes, {
     path: req.path,
     redirect: (path: string) => res.redirect(path),
-  });
-  const content: HTMLElement = renderToString(Component);
+  })
+
+  const content: string = renderToString(Component);
   return res.send(renderToStaticMarkup(Html(content)));
 });
 
