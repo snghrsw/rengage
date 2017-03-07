@@ -8,9 +8,46 @@ const config = {
   storageBucket: 'resume-7a6c3.appspot.com',
 };
 
-const firebaseInstance = firebase.initializeApp(config);
 
-export const isAuthLogin = (): boolean =>
-  firebaseInstance.auth().currentUser !== null;
+class Auth {
+  private instance: firebase.app.App;
 
-export default firebaseInstance;
+  constructor() {
+    this.instance = firebase.initializeApp(config);
+  }
+
+  get isSigned(): boolean {
+    return this.instance.auth().currentUser !== null;
+  }
+
+  get isSignedAdmin(): boolean {
+    return this.isSigned && this.instance.auth().currentUser.emailVerified;
+  }
+
+  get isSignedCustomer(): boolean {
+    return this.isSigned && this.instance.auth().currentUser.isAnonymous;
+  }
+
+  get uid(): string | null {
+    return this.isSigned ? this.instance.auth().currentUser.uid : null;
+  }
+
+  get isResumeAccpeted(): boolean {
+    if (!this.isSignedCustomer) {
+      return false;
+    }
+    const isResumeAcceptedRefs: firebase.database.Reference =
+      firebase.database().ref(`applicate/${this.uid}/isResumeAccepted`);
+
+    isResumeAcceptedRefs.on('value', snapshot => {
+      if (!snapshot.val()) {
+        return false;
+      }
+    });
+    return true;
+  }
+
+}
+
+export default firebase;
+export const auth: Auth = new Auth();
