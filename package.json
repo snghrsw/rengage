@@ -2,20 +2,21 @@
   "name": "rengage",
   "version": "0.0.1",
   "description": "Resume Engagement",
-  "main": "index.js",
+  "main": "./bin/server.js",
   "license": "MIT",
   "scripts": {
     "start": "run-s run-p clean build:client serve",
-    "test": "jest",
-    "serve": "DEBUG=info ts-node --inspect ./src/server.ts",
-    "serve:bin": "DEBUG=info node ./bin/server.js",
+    "serve": "DEBUG=info ts-node --debug ./src/server",
+    "serve:bin": "DEBUG=info node --debug --nolazy ./bin/server",
     "serve:prod": "npm-run-all clean-build serve:bin",
+    "test": "jest",
     "clean-build": "npm-run-all --parallel clean test build:*",
     "clean": "rimraf ./bin && rimraf ./public",
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --test --fix './src/**/*.ts?(x)'",
-    "build:client": "webpack --progress --colors --config ./config/webpack.client.js",
-    "build:server": "webpack --progress --colors --config ./config/webpack.server.js",
-    "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch"
+    "build:client": "webpack --progress --colors --config ./webpack.config.js",
+    "build:server": "tsc",
+    "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch",
+    "debug": "node-inspector"
   },
   "jest": {
     "transform": {
@@ -52,6 +53,7 @@
     "react-mde": "^0.9.5",
     "redux": "^3.6.0",
     "rimraf": "^2.6.1",
+    "source-map-support": "^0.4.11",
     "ts-jest": "^19.0.0",
     "ts-loader": "^2.0.1",
     "ts-node": "^2.1.0",

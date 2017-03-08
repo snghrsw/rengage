@@ -5,23 +5,26 @@
       "es2015",
       "dom"
     ],
-    "allowJs": true,
-    "moduleResolution": "node",
     "module": "commonjs",
     "target": "es5",
     "noImplicitAny": true,
-    "jsx": "react",
     "sourceMap": true,
-    "noImplicitAny": false
+    "jsx": "react",
+    "outDir": "./bin",
+    "sourceRoot": "./src",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "traceResolution": true,
+    "noEmitOnError": true
   },
   "typeRoots": [
     "./node_modules/@types"
   ],
   "exclude": [
     "node_modules",
-    "typings"
-  ],
-  "filesGlob": [
-    "./src/server/routes.ts"
+    "typings",
+    "./spec",
+    "./config"
   ]
 }
