@@ -1,3 +1,4 @@
+
 import * as Router from 'universal-router';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
@@ -33,4 +34,3 @@ app.use(async (req: express.Request, res: express.Response) => {
 app.listen(3000, () => {
   debug('Example app listening on port 3000!');
 });
-;
