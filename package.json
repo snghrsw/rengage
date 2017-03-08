@@ -5,12 +5,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm-run-all clean build:client serve",
+    "start": "run-s run-p clean build:client serve",
     "test": "jest",
-    "serve": "DEBUG=info ts-node --debug ./src/server.ts",
+    "serve": "DEBUG=info ts-node --inspect ./src/server.ts",
+    "serve:bin": "DEBUG=info node ./bin/server.js",
+    "serve:prod": "npm-run-all clean-build serve:bin",
+    "clean-build": "npm-run-all --parallel clean test build:*",
     "clean": "rimraf ./bin && rimraf ./public",
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --test --fix './src/**/*.ts?(x)'",
     "build:client": "webpack --progress --colors --config ./config/webpack.client.js",
+    "build:server": "webpack --progress --colors --config ./config/webpack.server.js",
     "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch"
   },
   "jest": {
@@ -39,7 +43,7 @@
     "body-parser": "^1.17.1",
     "debug": "^2.6.1",
     "eslint": "^3.17.0",
-    "express": "^4.14.1",
+    "express": "^4.15.2",
     "firebase": "^3.6.10",
     "jest": "^19.0.2",
     "npm-run-all": "^4.0.2",

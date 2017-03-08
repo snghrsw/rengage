@@ -1,12 +1,14 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: './src/server/',
   output: {
     filename: './bin/server.js',
   },
-  devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
+  devtool: 'inline-source-map',
   cache: true,
   target: 'node',
   node: {
