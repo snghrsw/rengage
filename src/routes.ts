@@ -5,6 +5,11 @@ import Resume from './components/organisms/Resume';
 import Waiting from './components/pages/Waiting';
 import { auth } from './server/firebase';
 
+interface IUniversalRoute {
+  path: string;
+  action(props: { redirect?(transitionPath: string): void }): JSX.Element | void;
+}
+
 export default [
   {
     path: '/:uid',
@@ -54,4 +59,4 @@ export default [
       return AdminBoard();
     },
   },
-];
+] as IUniversalRoute[];

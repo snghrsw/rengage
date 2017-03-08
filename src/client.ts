@@ -1,9 +1,9 @@
 import * as ReactDOM from 'react-dom';
 
-import Router from 'universal-router';
+import * as Router from 'universal-router';
 import routes from './routes';
 
-function render(component) {
+function render(component: React.ReactElement<any>) {
   const rootElement: HTMLElement = document.getElementById('root');
   ReactDOM.render(component, rootElement);
 }
