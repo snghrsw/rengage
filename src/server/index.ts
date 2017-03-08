@@ -1,5 +1,3 @@
-require('source-map-support').install();
-
 import * as Router from 'universal-router';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';

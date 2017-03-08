@@ -8,8 +8,8 @@ export default function Html(content: string) {
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-        <script src="vendor.js" type="text/babel" />
-        <script src="bundle.js" type="text/babel" />
+        <script src="./vendor.js" />
+        <script src="./bundle.js" />
       </body>
     </html>
   );
