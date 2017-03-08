@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/server.ts',
+  entry: './src/server/',
   output: {
     filename: './bin/server.js',
   },
