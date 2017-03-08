@@ -24,6 +24,9 @@
       "js"
     ]
   },
+  "browser": {
+    "vertx": false
+  },
   "dependencies": {
     "@types/body-parser": "^0.0.34",
     "@types/debug": "^0.0.29",

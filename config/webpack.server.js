@@ -7,12 +7,16 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
+  cache: true,
   target: 'node',
   node: {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
   },
+  plugins: [
+    new webpack.IgnorePlugin(/^vertx$/),
+  ],
   module: {
     rules: [
       {
@@ -26,4 +30,4 @@ module.exports = {
       },
     ],
   },
-}
+};
