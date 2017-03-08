@@ -5,8 +5,8 @@
   "main": "./bin/server.js",
   "license": "MIT",
   "scripts": {
-    "start": "run-s run-p clean build:client serve",
-    "serve": "DEBUG=info ts-node --debug ./src/server",
+    "start": "npm-run-all clean build:* serve:bin",
+    "serve": "DEBUG=info ts-node --debug --nolazy ./src/server",
     "serve:bin": "DEBUG=info node --debug --nolazy ./bin/server",
     "serve:prod": "npm-run-all clean-build serve:bin",
     "test": "jest",
