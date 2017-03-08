@@ -8,7 +8,6 @@ const config = {
   storageBucket: 'resume-7a6c3.appspot.com',
 };
 
-
 class Auth {
   private instance: firebase.app.App;
 
@@ -32,21 +31,19 @@ class Auth {
     return this.isSigned ? this.instance.auth().currentUser.uid : null;
   }
 
-  get isResumeAccpeted(): boolean {
-    if (!this.isSignedCustomer) {
-      return false;
-    }
-    const isResumeAcceptedRefs: firebase.database.Reference =
-      firebase.database().ref(`applicate/${this.uid}/isResumeAccepted`);
-
-    isResumeAcceptedRefs.on('value', snapshot => {
-      if (!snapshot.val()) {
-        return false;
+  get isResumeAccpeted(): Promise<boolean> {
+    return new Promise(resolve => {
+      if (!this.isSignedCustomer) {
+        return resolve(false);
       }
-    });
-    return true;
-  }
 
+      firebase.database()
+        .ref(`applicate/${this.uid}/isResumeAccepted`)
+        .once('value', snapshot => {
+          return resolve(Boolean(snapshot.val()));
+        });
+    });
+  }
 }
 
 export default firebase;

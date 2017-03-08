@@ -13,11 +13,11 @@ interface IUniversalRoute {
 export default [
   {
     path: '/:uid',
-    action: ({ redirect }) => {
+    action: async ({ redirect }) => {
       if (!auth.isSignedCustomer) {
         return redirect('/');
       }
-      if (!auth.isResumeAccpeted) {
+      if (!await auth.isResumeAccpeted) {
         return Waiting();
       }
       return redirect('/resume');
@@ -34,8 +34,8 @@ export default [
   },
   {
     path: '/resume',
-    action: ({ redirect }) => {
-      if (!auth.isResumeAccpeted) {
+    action: async ({ redirect }) => {
+      if (!await auth.isResumeAccpeted) {
         return redirect(`/`);
       }
       return Resume();
