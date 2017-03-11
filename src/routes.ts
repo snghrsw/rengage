@@ -17,8 +17,8 @@ export default [
       if (!auth.isSignedCustomer) {
         return redirect('/');
       }
-      if (!await auth.isResumeAccpeted) {
-        return Waiting();
+      if (!await auth.isResumeAccpetedAsync) {
+        return Waiting(auth);
       }
       return redirect('/resume');
     },
@@ -35,7 +35,7 @@ export default [
   {
     path: '/resume',
     action: async ({ redirect }) => {
-      if (!await auth.isResumeAccpeted) {
+      if (!await auth.isResumeAccpetedAsync) {
         return redirect(`/`);
       }
       return Resume();

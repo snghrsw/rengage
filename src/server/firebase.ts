@@ -31,7 +31,7 @@ class Auth {
     return this.isSigned ? this.instance.auth().currentUser.uid : null;
   }
 
-  get isResumeAccpeted(): Promise<boolean> {
+  get isResumeAccpetedAsync(): Promise<boolean> {
     return new Promise(resolve => {
       if (!this.isSignedCustomer) {
         return resolve(false);
