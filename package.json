@@ -15,6 +15,7 @@
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --test --fix './src/**/*.ts?(x)'",
     "build:client": "webpack --progress --colors --config ./webpack.config.js",
     "build:server": "tsc",
+    "coverage:update": "firebase deploy -p ./bin/coverage/lcov-report --only hosting",
     "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch",
     "debug": "node-inspector"
   },
@@ -22,7 +23,6 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "firebase": "^3.6.10",
-    "firebase-tools": "^3.5.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-mde": "^0.9.5",
