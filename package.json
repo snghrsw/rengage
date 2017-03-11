@@ -15,7 +15,7 @@
     "lint": "tslint -c ./tslint.json --project ./tsconfig.json --test --fix './src/**/*.ts?(x)'",
     "build:client": "webpack --progress --colors --config ./webpack.config.js",
     "build:server": "tsc",
-    "coverage:update": "firebase deploy -p ./bin/coverage/lcov-report --only hosting",
+    "coverage:update": "firebase deploy -p ./bin/coverage/lcov-report --only hosting --token=$FIREBASE_TOKEN --non-interactive",
     "sketch:generate": "rimraf ./sketch/* && sketchtool export artboards --output=sketch ./resume.sketch",
     "debug": "node-inspector"
   },
