@@ -2,6 +2,7 @@
 import * as Router from 'universal-router';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import * as logger from 'morgan';
 
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
@@ -13,6 +14,7 @@ import webApiRouter from './../server/webApiRouter';
 const app = express();
 const debug = debugFactory('info');
 
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
