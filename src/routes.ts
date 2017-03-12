@@ -4,6 +4,7 @@ import LoginForm from './components/organisms/LoginForm';
 import Resume from './components/organisms/Resume';
 import Waiting from './components/pages/Waiting';
 import { auth } from './server/firebase';
+import NotFound from './components/pages/NotFound';
 
 interface IUniversalRoute {
   path: string;
@@ -57,6 +58,12 @@ export default [
         return redirect('/login');
       }
       return AdminBoard();
+    },
+  },
+  {
+    path: '*',
+    action: () => {
+      return NotFound();
     },
   },
 ] as IUniversalRoute[];
