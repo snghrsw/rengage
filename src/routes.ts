@@ -3,8 +3,8 @@ import ApplicateForm from './components/organisms/ApplicateForm';
 import LoginForm from './components/organisms/LoginForm';
 import Resume from './components/organisms/Resume';
 import Waiting from './components/pages/Waiting';
-import { auth } from './server/firebase';
 import NotFound from './components/pages/NotFound';
+import { auth } from './server/firebaseAuth';
 
 interface IUniversalRoute {
   path: string;
@@ -12,27 +12,6 @@ interface IUniversalRoute {
 }
 
 export default [
-  {
-    path: '/:uid',
-    action: async ({ redirect }) => {
-      if (!auth.isSignedCustomer) {
-        return redirect('/');
-      }
-      if (!await auth.isResumeAccpetedAsync) {
-        return Waiting(auth);
-      }
-      return redirect('/resume');
-    },
-  },
-  {
-    path: '/',
-    action: ({ redirect }) => {
-      if (auth.isSignedCustomer) {
-        return redirect(`/${auth.uid}`);
-      }
-      return ApplicateForm();
-    },
-  },
   {
     path: '/resume',
     action: async ({ redirect }) => {
@@ -58,6 +37,27 @@ export default [
         return redirect('/login');
       }
       return AdminBoard();
+    },
+  },
+  {
+    path: '/:uid',
+    action: async ({ redirect }) => {
+      if (!auth.isSignedCustomer) {
+        return redirect('/');
+      }
+      if (!await auth.isResumeAccpetedAsync) {
+        return Waiting({ locationHref: location.href });
+      }
+      return redirect('/resume');
+    },
+  },
+  {
+    path: /\//,
+    action: ({ redirect }) => {
+      if (auth.isSignedCustomer) {
+        return redirect(`/${auth.uid}`);
+      }
+      return ApplicateForm();
     },
   },
   {

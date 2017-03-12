@@ -1,28 +1,20 @@
 import * as express from 'express';
-
-import firebase from './firebase';
+import { auth } from './firebaseAuth';
 
 const app = express();
 
 // Authentication for the admin
-app.post('/auth', (req, res) => {
-  return firebase.auth().signInWithEmailAndPassword(req.body.username, req.body.password)
+app.post('/auth', (req: express.Request, res: express.Response) => {
+  return auth.authAdmin(req.body.username, req.body.password)
     .then(() => res.redirect('/admin'))
     .catch(() => res.redirect('/login'));
 });
 
 // Resume application for the customer
-app.post('/applicate', async (req, res) => {
-  const anonymouslyUser = await firebase.auth().signInAnonymously()
+app.post('/applicate', (req: express.Request, res: express.Response) => {
+  return auth.authCustomer(req.body.companyName)
+    .then(customer => res.redirect(`/${customer.uid}`))
     .catch(() => res.redirect('/'));
-
-  firebase.database()
-    .ref(`applicate/${anonymouslyUser.uid}`)
-    .set({
-      ...req.body,
-      isResumeAccepted: false,
-    });
-  return res.redirect(`/${anonymouslyUser.uid}`);
 });
 
 export default app;
