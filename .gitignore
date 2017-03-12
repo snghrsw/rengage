@@ -5,3 +5,5 @@ public
 typings
 launch.json
 yarn-error.log
+*.snap
+settings.json
