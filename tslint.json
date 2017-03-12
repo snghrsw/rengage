@@ -25,6 +25,9 @@
       "static-before-instance",
       "variables-before-functions"
     ],
+    "trailing-comma": [
+      false
+    ],
     "no-unused-variable": [
       true,
       "react"
