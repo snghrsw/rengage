@@ -7,3 +7,4 @@ launch.json
 yarn-error.log
 *.snap
 settings.json
+.vscode/
