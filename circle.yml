@@ -1,0 +1,4 @@
+machine:
+  node:
+    version: 7.0.0
+  timezone: Asia/Tokyo
